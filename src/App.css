@@ -1,5 +1,25 @@
+
+
 .App {
   text-align: center;
+  margin: 0 auto;
+  padding: 100px;
+  width: 500px;
+
+}
+
+.App h2{
+  text-align: center;
+  margin: 0 auto;
+  padding-bottom: 40px;
+  width: 300px;
+}
+
+.App h3{
+  text-align: center;
+  padding-top: 0;
+  padding-bottom: 40px;
+ 
 }
 
 .App-logo {
@@ -35,4 +55,28 @@
   to {
     transform: rotate(360deg);
   }
+}
+
+.input-field{
+  width: 230px;
+  margin-bottom: 10px !important;
+
+  
+}
+
+.signup-form{
+  background-color: #f4f4f4;
+  padding: 70px;
+  width: 350px;
+  margin-left: 50px;
+  padding-left: 60px;
+  border-radius: 10px;
+  box-shadow: 0px 3px 3px 3px rgba(128, 128, 128, 0.2);
+}
+
+.signup-button{
+  margin-top: 20px;
+  justify-content: center;
+  height: 50px;
+  
 }

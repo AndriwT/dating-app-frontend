@@ -1,23 +1,18 @@
-import logo from './logo.svg';
-import './App.css';
+import "./App.css";
+import AuthView from "./views/AuthView";
+import { BrowserRouter, Route, Switch } from "react-router-dom";
+
+//changes the color of the app's background
+document.body.style = "background: #f4f4f4";
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div>
+      <BrowserRouter>
+        <Switch>
+          <Route exact path="/api/auth" component={AuthView} />
+        </Switch>
+      </BrowserRouter>
     </div>
   );
 }
