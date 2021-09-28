@@ -59,7 +59,7 @@ const AuthView = () => {
           </p>
         </Col>
         <Col className="App">
-          <div className="signup-form">
+          <div className="auth-form">
             <h3>Signup | Login</h3>
             <FormControl>
               <TextField
