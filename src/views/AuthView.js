@@ -1,3 +1,6 @@
+import { useState, useEffect, useContext } from "react";
+import { useHistory } from "react-router";
+
 import { Container, Row, Col } from "react-bootstrap";
 import {
   TextField,
@@ -7,39 +10,52 @@ import {
   IconButton,
   InputLabel,
   Button,
-  ButtonGroup,
 } from "@mui/material";
-import { useState } from "react";
 import Visibility from "@mui/icons-material/Visibility";
 import VisibilityOff from "@mui/icons-material/VisibilityOff";
 
+import { UserContext } from "../context/UserContext";
+
 const AuthView = () => {
-  const [values, setValues] = useState({
-    amount: "",
+  const history = useHistory();
+  const { loginUser } = useContext(UserContext);
+  const [showPassword, setShowPassword] = useState(false);
+  const [user, setUser] = useState({
+    email: "",
     password: "",
-    weight: "",
-    weightRange: "",
-    showPassword: false,
   });
 
-  const handleChange = (prop) => (event) => {
-    setValues({ ...values, [prop]: event.target.value });
-  };
-
   const handleClickShowPassword = () => {
-    setValues({
-      ...values,
-      showPassword: !values.showPassword,
-    });
+    setShowPassword(!showPassword);
   };
 
   const handleMouseDownPassword = (event) => {
     event.preventDefault();
   };
 
+  const handleChange = (event) => {
+    setUser({ ...user, [event.target.name]: event.target.value });
+  };
+
+  const handleSubmit = async (event) => {
+    event.preventDefault();
+    setUser({ [event.target.name]: event.target.value });
+    loginUser(user);
+    setUser({
+      email: "",
+      password: "",
+    });
+    alert("Successfully Logged in!");
+    goToPath(`/matches`);
+  };
+
+  const goToPath = async (path) => {
+    await history.push(path);
+  };
+
   return (
     <Container>
-      <Row className="stupid-bitch">
+      <Row>
         <Col className="App">
           <h2>i.love(you);</h2>
           <img
@@ -51,6 +67,7 @@ const AuthView = () => {
               boxShadow: "0px 3px 3px 3px rgba(128, 128, 128, 0.2)",
             }}
           />
+
           <p>
             Hi There! This text here will tell you the basics of this app as
             well as invite you to either login or signup, so when this text is
@@ -60,24 +77,31 @@ const AuthView = () => {
         </Col>
         <Col className="App">
           <div className="auth-form">
-            <h3>Signup | Login</h3>
+            <h3>Login</h3>
             <FormControl>
+              {/* //-------------------------EMAIL */}
               <TextField
+                onChange={handleChange}
+                name="email"
+                value={user.email}
                 className="input-field"
                 id="filled-basic"
                 label="Email"
                 variant="filled"
               />
+              {/* //-------------------------EMAIL
+              //-------------------------PASSWORD */}
               <FormControl variant="filled">
                 <InputLabel htmlFor="filled-adornment-password">
                   Password
                 </InputLabel>
                 <FilledInput
                   id="filled-adornment"
-                  className="input-field-password"
-                  type={values.showPassword ? "text" : "password"}
-                  value={values.password}
-                  onChange={handleChange("password")}
+                  className="input-field-password input-field"
+                  type={showPassword ? "text" : "password"}
+                  value={user.password}
+                  onChange={handleChange}
+                  name="password"
                   endAdornment={
                     <InputAdornment position="end">
                       <IconButton
@@ -86,38 +110,33 @@ const AuthView = () => {
                         onMouseDown={handleMouseDownPassword}
                         edge="end"
                       >
-                        {values.showPassword ? (
-                          <VisibilityOff />
-                        ) : (
-                          <Visibility />
-                        )}
+                        {showPassword ? <VisibilityOff /> : <Visibility />}
                       </IconButton>
                     </InputAdornment>
                   }
                 />
-                <ButtonGroup
-                  className="signup-button"
-                  disableElevation
+                {/* //-------------------------PASSWORD */}
+                <Button
+                  className="input-field"
+                  onClick={handleSubmit}
+                  style={{
+                    color: "purple",
+                    borderColor: "purple",
+                    width: "100%",
+                  }}
+                  variant="outlined"
+                >
+                  LogIn
+                </Button>
+                <label>!account ? signup : exit;</label>
+                <Button
+                  className="input-field"
+                  onClick={() => goToPath(`/signup`)}
+                  style={{ backgroundColor: "purple", width: "100%" }}
                   variant="contained"
                 >
-                  <Button
-                    style={{ backgroundColor: "purple", width: "100%" }}
-                    variant="contained"
-                  >
-                    SignUp
-                  </Button>
-
-                  <Button
-                    style={{
-                      color: "purple",
-                      borderColor: "purple",
-                      width: "100%",
-                    }}
-                    variant="outlined"
-                  >
-                    LogIn
-                  </Button>
-                </ButtonGroup>
+                  SignUp
+                </Button>
               </FormControl>
             </FormControl>
           </div>
