@@ -5,7 +5,6 @@ import { useHistory } from "react-router";
 export const UserContext = createContext({})
 
 const UserProvider = ({children}) => { 
-  const history = useHistory();
   const [users, setUsers] = useState([]);
   const [loggedIn, setLoggedIn] = useState(false);
   const [user, setUser] = useState({
@@ -36,18 +35,11 @@ const UserProvider = ({children}) => {
   
   const loginUser = async (user) => {
     const response = await axios.post('http://localhost:5000/api/auth/login', user);
-    // set token && possibly id in localStorage
     const { data } = response;
     setUser(data.user);
     localStorage.setItem('jwtdatingapp', JSON.stringify(data.token, data.user));
     setLoggedIn(true);
     console.log(response.data)
-  }
-
-  const logoutUser = async (path) => {
-    localStorage.removeItem('jwtdatingapp');
-    setLoggedIn(false);
-    goToPath(path)
   }
 
   //signup
@@ -58,11 +50,6 @@ const UserProvider = ({children}) => {
     console.log(response.data);
   }
 
-  const goToPath = (path) => {
-    history.push(path);
-  };
-
-
   return (
     <UserContext.Provider
     value={{
@@ -71,11 +58,10 @@ const UserProvider = ({children}) => {
         users,
         setUsers,
         loginUser,
-        logoutUser,
+        setLoggedIn,
         signupUser,
         getUsers,
         loggedIn,
-        goToPath
       }}
     >
       {children}

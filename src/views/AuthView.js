@@ -46,11 +46,7 @@ const AuthView = () => {
       password: "",
     });
     alert("Successfully Logged in!");
-    goToPath(`/matches`);
-  };
-
-  const goToPath = async (path) => {
-    await history.push(path);
+    history.push(`/matches`);
   };
 
   return (
@@ -131,7 +127,7 @@ const AuthView = () => {
                 <label>!account ? signup : exit;</label>
                 <Button
                   className="input-field"
-                  onClick={() => goToPath(`/signup`)}
+                  onClick={() => history.push(`/signup`)}
                   style={{ backgroundColor: "purple", width: "100%" }}
                   variant="contained"
                 >

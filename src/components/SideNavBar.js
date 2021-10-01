@@ -1,12 +1,20 @@
 import { useContext } from "react";
 import { UserContext } from "../context/UserContext";
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 
 
 
 const SideNavBar = () => {
+const history = useHistory()
+  const { loggedIn, setLoggedIn } = useContext(UserContext);
 
-  const { loggedIn, logoutUser } = useContext(UserContext);
+  const logoutUser =  () => {
+    localStorage.removeItem('jwtdatingapp');
+    setLoggedIn(false);
+     history.push(`/auth`);
+  }
+
+
 
   return (
     <div className="sidenav">
