@@ -1,15 +1,18 @@
-
+import { useContext } from "react";
+import UserCard from "../components/UserCard";
+import { UserContext } from "../context/UserContext";
 
 const MatchView = () => {
-
-
+  const { users } = useContext(UserContext);
 
   return (
     <>
       <h1 className="view-container">
-        This is the MatchView View Gurl you did it, you made your dreams not be
-        dreams 🥲
+        MatchView 🥲
       </h1>
+      <div>
+        <UserCard />
+      </div>
     </>
   );
 };

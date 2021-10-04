@@ -104,6 +104,13 @@
   margin-right: 50px;
 }
 
+.users-container {
+  margin-top: 150px;
+  margin-left: 250px;
+  width: 100px;
+}
+
+
 /* Side navigation panel */
 
 .sidenav {

@@ -1,5 +1,6 @@
 import { useState, useEffect, useContext } from "react";
-import { useHistory } from "react-router";
+import { useHistory, Redirect, withRouter } from 'react-router-dom'
+
 
 import { Container, Row, Col } from "react-bootstrap";
 import {
@@ -18,7 +19,7 @@ import { UserContext } from "../context/UserContext";
 
 const AuthView = () => {
   const history = useHistory();
-  const { loginUser } = useContext(UserContext);
+  const { loginUser, loggedIn } = useContext(UserContext);
   const [showPassword, setShowPassword] = useState(false);
   const [user, setUser] = useState({
     email: "",
@@ -39,14 +40,21 @@ const AuthView = () => {
 
   const handleSubmit = async (event) => {
     event.preventDefault();
-    setUser({ [event.target.name]: event.target.value });
-    loginUser(user);
-    setUser({
-      email: "",
-      password: "",
-    });
-    alert("Successfully Logged in!");
-    history.push(`/matches`);
+    if (!user.email || !user.password) {
+      alert("Please check credentials");
+    } else {
+      setUser({ [event.target.name]: event.target.value });
+      try {
+        setUser({
+          email: "",
+          password: "",
+        });
+        await loginUser(user);
+      } catch (error) {
+        console.log(error)
+      }
+      history.push('/matches')
+    }
   };
 
   return (
@@ -142,4 +150,4 @@ const AuthView = () => {
   );
 };
 
-export default AuthView;
+export default withRouter(AuthView);
