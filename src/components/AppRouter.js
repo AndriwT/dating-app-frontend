@@ -25,7 +25,6 @@ const AppRouter = () => {
             <Route exact path="/matches" component={MatchView} />
           </>
         )}
-        <Route component={AuthView} />
       </Switch>
     </BrowserRouter>
   );
