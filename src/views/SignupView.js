@@ -17,12 +17,17 @@ import {
 import { useContext, useState } from "react";
 import { useHistory } from "react-router";
 
+
 import { UserContext } from "../context/UserContext";
 
 const SignupView = () => {
-  const { signupUser } = useContext(UserContext);
+  const { signupUser, loginUser } = useContext(UserContext);
   const history = useHistory();
   const [showPassword, setShowPassword] = useState(false);
+  const [userL, setUserL] = useState({
+    email: "",
+    password: "",
+  });
   const [user, setUser] = useState({
     name: "",
     email: "",
@@ -48,6 +53,7 @@ const SignupView = () => {
 
   const handleSubmit = async (event) => {
     event.preventDefault();
+    setUser({ [event.target.name]: event.target.value });
     signupUser(user);
     setUser({
       name: "",
@@ -57,6 +63,12 @@ const SignupView = () => {
       age: 0,
       bio: "",
     });
+    await setUserL({ [event.target.name]: event.target.value });
+    await loginUser(userL);
+    await setUserL({
+      email: "",
+      password: "",
+    })
     alert("User successfully created!")
     goToPath(`/matches`)
   };
@@ -76,7 +88,7 @@ const SignupView = () => {
         name="name"
         style={{ marginRight: "10px" }}
         className="input-field"
-        id="filled-basic"
+     
         label="Full Name"
         variant="filled"
       />
