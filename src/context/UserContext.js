@@ -30,7 +30,7 @@ const UserProvider = ({ children }) => {
   };
 
   const getUsers = async () => {
-    const response = await axios.get(`${apiUrl}auth`);
+    const response = await axios.get(`${apiUrl}/auth`);
     console.log(response);
     setUsers(response.data);
   };
