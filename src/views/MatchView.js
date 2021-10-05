@@ -5,14 +5,19 @@ import { UserContext } from "../context/UserContext";
 const MatchView = () => {
   const { users } = useContext(UserContext);
 
+
   return (
     <>
-      <h1 className="view-container">
+      <h1 className="matches-title">
         MatchView 🥲
       </h1>
-      <div>
-        <UserCard />
+    <div className="matches-container">
+      {users && users.map((user, i) => (
+      <div key={i} className="users-container">
+        <UserCard props={user} />
       </div>
+      ))}
+    </div>
     </>
   );
 };

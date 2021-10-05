@@ -18,6 +18,7 @@ const history = useHistory()
 
   return (
     <div className="sidenav">
+    <div >
       <ul>
         {/* <li>
           <Link to="/manageTopics">
@@ -32,6 +33,7 @@ const history = useHistory()
           </li>
         )}
       </ul>
+    </div>
     </div>
   );
 };

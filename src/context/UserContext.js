@@ -20,8 +20,8 @@ const UserProvider = ({ children }) => {
   });
 
   useEffect(async () => {
-    const response = await getUsers();
     checkLoggedIn();
+    await getUsers();
   }, []);
 
   const checkLoggedIn = () => {
@@ -61,6 +61,9 @@ if (!data.token || !data.user) return;
     if (!data.token || !data.user) return;
     setUser(data.user);
     console.log(response.data);
+
+    // TODO: instead of just setting the user set the user to the state
+    // also set the token like in the login
   };
 
   return (

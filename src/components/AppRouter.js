@@ -26,8 +26,7 @@ const AppRouter = () => {
             <Route exact path="/matches" component={MatchView} />
           </>
         )}
-        <Route path="/404" component={NotFoundPage} />
-        <Redirect to="/404" />
+        <Route path="*" component={NotFoundPage} />
       </Switch>
     </BrowserRouter>
   );
