@@ -1,21 +1,15 @@
+import { Link } from "react-router-dom";
 import {
   Button,
   Card,
   CardActions,
   CardContent,
-  CardMedia,
   Typography,
 } from "@mui/material";
 
-const UserCard = ({ props: { name, gender, age, bio } }) => {
+const UserCard = ({ props: { name, gender, age, bio, uid } }) => {
   return (
-    <Card sx={{ maxWidth: 250, maxHeight: 250}}>
-      {/* <CardMedia
-        component="img"
-        alt="green iguana"
-     
-        image="/static/images/cards/contemplative-reptile.jpg"
-      /> */}
+    <Card sx={{ width: 250, height: 250}}>
       <CardContent>
         <Typography gutterBottom variant="h5" component="div">
           {name}
@@ -26,13 +20,12 @@ const UserCard = ({ props: { name, gender, age, bio } }) => {
         <Typography variant="body2" color="text.secondary">
           {age}
         </Typography>
-        <Typography variant="body2" color="text.secondary">
+        <Typography sx={{maxHeight: 80}} style={{lineClamp: 3, wordBreak: 'break-all', overflow: 'hidden'}} variant="body2" color="text.secondary">
           {bio}
         </Typography>
       </CardContent>
       <CardActions>
-        <Button size="small">Share</Button>
-        <Button size="small">Learn More</Button>
+        <Link to={"/chatroom?id=" + uid}><Button size="small">Message</Button></Link>
       </CardActions>
     </Card>
   );

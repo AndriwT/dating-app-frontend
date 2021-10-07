@@ -6,7 +6,7 @@ import { Link, useHistory } from "react-router-dom";
 
 const SideNavBar = () => {
 const history = useHistory()
-  const { loggedIn, setLoggedIn } = useContext(UserContext);
+  const { loggedIn, setLoggedIn, user } = useContext(UserContext);
 
   const logoutUser =  () => {
     localStorage.removeItem('jwtdatingapp');
@@ -19,13 +19,14 @@ const history = useHistory()
   return (
     <div className="sidenav">
     <div >
+      <h3>{user.name}</h3>
       <ul>
-        {/* <li>
-          <Link to="/manageTopics">
-            <i className="bi bi-gear-fill"></i>
-            Manage Topics
+        <li style={{ cursor: "pointer"}} >
+          <Link to="/matches">
+            <i className="bi bi-box-arrow-right"></i>
+            ChatRooms
           </Link>
-        </li> */}
+        </li>
         { loggedIn && (
           <li style={{ cursor: "pointer" }} onClick={logoutUser}>
             <i className="bi bi-box-arrow-right"></i>

@@ -1,5 +1,5 @@
 import { useState, useEffect, useContext } from "react";
-import { useHistory, Redirect, withRouter } from 'react-router-dom'
+import { useHistory, withRouter } from 'react-router-dom'
 
 
 import { Container, Row, Col } from "react-bootstrap";

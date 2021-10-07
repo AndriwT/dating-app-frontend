@@ -19,20 +19,41 @@ const UserProvider = ({ children }) => {
     bio: "",
   });
 
-  useEffect(async () => {
+  console.log(user);
+
+  useEffect(  () => {
     checkLoggedIn();
-    await getUsers();
+    getUsers();
   }, []);
 
-  const checkLoggedIn = () => {
-    const token = localStorage.getItem("jwtdatingapp");
-    return token ? setLoggedIn(true) : setLoggedIn(false);
-  };
-
+  const getUserById = async (id) => {
+    const response = await axios.get(`${apiUrl}/auth/${id}`);
+    return response.data;
+  }
+ 
+  
   const getUsers = async () => {
     const response = await axios.get(`${apiUrl}/auth`);
     console.log(response);
     setUsers(response.data);
+    return response.data;
+  };
+
+  const checkLoggedIn = async () => {
+    const token = localStorage.getItem("jwtdatingapp");
+
+    
+    if (token) {
+      let payload = token.split(".")[1]
+      payload = atob(payload);
+      console.log(payload);
+      const userId = JSON.parse(payload).uid;
+      const userFromDB =  await getUserById(userId);
+      setUser(userFromDB);
+    }
+    // setUser({ ...user, uid: JSON.parse(payload).uid});
+
+    return token ? setLoggedIn(true) : setLoggedIn(false);
   };
 
   const loginUser = async (user) => {
@@ -66,6 +87,8 @@ if (!data.token || !data.user) return;
     // also set the token like in the login
   };
 
+
+
   return (
     <UserContext.Provider
       value={{
@@ -78,6 +101,8 @@ if (!data.token || !data.user) return;
         signupUser,
         getUsers,
         loggedIn,
+       // messages,
+        //getMessagesByChatroomId,
       }}
     >
       {children}

@@ -21,13 +21,9 @@ import { useHistory } from "react-router";
 import { UserContext } from "../context/UserContext";
 
 const SignupView = () => {
-  const { signupUser, loginUser } = useContext(UserContext);
+  const { signupUser, loginUser, getUsers } = useContext(UserContext);
   const history = useHistory();
   const [showPassword, setShowPassword] = useState(false);
-  const [userL, setUserL] = useState({
-    email: "",
-    password: "",
-  });
   const [user, setUser] = useState({
     name: "",
     email: "",
@@ -53,23 +49,10 @@ const SignupView = () => {
 
   const handleSubmit = async (event) => {
     event.preventDefault();
-    setUser({ [event.target.name]: event.target.value });
-    signupUser(user);
-    setUser({
-      name: "",
-      email: "",
-      password: "",
-      gender: "",
-      age: 0,
-      bio: "",
-    });
-    await setUserL({ [event.target.name]: event.target.value });
-    await loginUser(userL);
-    await setUserL({
-      email: "",
-      password: "",
-    })
+    await signupUser(user);
+    await getUsers();
     alert("User successfully created!")
+    await loginUser(user);
     goToPath(`/matches`)
   };
 

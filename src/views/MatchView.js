@@ -1,9 +1,12 @@
+import { useState } from "react";
 import { useContext } from "react";
 import UserCard from "../components/UserCard";
 import { UserContext } from "../context/UserContext";
 
 const MatchView = () => {
   const { users } = useContext(UserContext);
+
+  console.log(users);
 
 
   return (
