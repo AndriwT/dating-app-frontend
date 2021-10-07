@@ -19,7 +19,7 @@ const AppRouter = () => {
       <Switch>
         { !loggedIn ? (
           <>
-            <Route exact path="/auth" component={AuthView} />
+            <Route exact path="/" component={AuthView} />
             <Route exact path="/signup" component={SignupView} />
           </>
         ) : (

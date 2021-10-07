@@ -11,7 +11,7 @@ const history = useHistory()
   const logoutUser =  () => {
     localStorage.removeItem('jwtdatingapp');
     setLoggedIn(false);
-     history.push(`/auth`);
+     history.push(`/`);
   }
 
 
