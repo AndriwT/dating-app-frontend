@@ -24,7 +24,7 @@ const ChatRoomView = () => {
 
   const getMessagesByChatroomId = async () => {
     const response = await axios.post(
-      `${apiUrl}/chatroom`,
+      `${apiUrl}/api/chatroom`,
       {id: chatIdRef.current}
     );
     setChat(response.data);
@@ -71,7 +71,7 @@ function chatIdGenerator (userIdOne, userIdTwo) {
 
 console.log("CHATROOM ID: ", chatIdRef);
   useEffect(() => {
-    socketRef.current = io.connect("http://localhost:5000?id=" + chatIdRef.current); // changed "http://localhost:5000?id=" --> `${apiUrl}?id=`
+    socketRef.current = io.connect(`${apiUrl}?id=` + chatIdRef.current); // changed "http://localhost:5000?id=" --> `${apiUrl}?id=`
     socketRef.current.on("message", (currentMessage) => {
       setChat([...chat, currentMessage]);
     })

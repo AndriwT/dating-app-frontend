@@ -27,13 +27,13 @@ const UserProvider = ({ children }) => {
   }, []);
 
   const getUserById = async (id) => {
-    const response = await axios.get(`${apiUrl}/auth/${id}`);
+    const response = await axios.get(`${apiUrl}/api/auth/${id}`);
     return response.data;
   }
  
   
   const getUsers = async () => {
-    const response = await axios.get(`${apiUrl}/auth`);
+    const response = await axios.get(`${apiUrl}/api/auth`);
     console.log(response);
     setUsers(response.data);
     return response.data;
@@ -58,7 +58,7 @@ const UserProvider = ({ children }) => {
 
   const loginUser = async (user) => {
     const response = await axios.post(
-      `${apiUrl}/auth/login`,
+      `${apiUrl}/api/auth/login`,
       user
     );
     const { data } = response;
@@ -75,7 +75,7 @@ if (!data.token || !data.user) return;
   //signup
   const signupUser = async (user) => {
     const response = await axios.post(
-      `${apiUrl}/auth/signup`,
+      `${apiUrl}/api/auth/signup`,
       user
       );
       const { data } = response;
