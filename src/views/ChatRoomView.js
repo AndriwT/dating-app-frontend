@@ -17,17 +17,17 @@ const ChatRoomView = () => {
   const [chatUser, setChatUser] = useState(null)
 
 
+  const getChatUserObject = async () => {
+    const chatUserObject = await getUserById(userTwoId);
+    console.log(chatUserObject);
+    setChatUser(chatUserObject);
+  }
   
   useEffect(() => {
     getMessagesByChatroomId();
     getChatUserObject()
   }, [])
   
-  const getChatUserObject = async () => {
-    const chatUserObject = await getUserById(userTwoId);
-    console.log(chatUserObject);
-    setChatUser(chatUserObject);
-  }
   
 
 
@@ -106,15 +106,22 @@ function chatIdGenerator (userIdOne, userIdTwo) {
   };
 
 
+
   return (
     <>
       <div className="chat-container">
         <h2 className="matches-title" style={{marginBottom: 30}}>Chat Room</h2>
         <div className="render-chat">
+        <div>
 
+          {
+          (chatUser && chatUser.name && (
 
+              <h3>You are chatting with {chatUser.name}</h3>
+            ))
+          }
+        </div>
 
-          <h3>You are chatting with {chatUser.name}</h3>
           <hr />
           <div className="messages-container">
           {renderChat()}
