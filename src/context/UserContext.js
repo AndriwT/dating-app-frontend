@@ -19,8 +19,6 @@ const UserProvider = ({ children }) => {
     bio: "",
   });
 
-  console.log(user);
-
   useEffect(  () => {
     checkLoggedIn();
     getUsers();
@@ -34,7 +32,6 @@ const UserProvider = ({ children }) => {
   
   const getUsers = async () => {
     const response = await axios.get(`${apiUrl}/api/auth`);
-    console.log(response);
     setUsers(response.data);
     return response.data;
   };
@@ -46,7 +43,6 @@ const UserProvider = ({ children }) => {
     if (token) {
       let payload = token.split(".")[1]
       payload = atob(payload);
-      console.log(payload);
       const userId = JSON.parse(payload).uid;
       const userFromDB =  await getUserById(userId);
       setUser(userFromDB);
@@ -69,7 +65,6 @@ if (!data.token || !data.user) return;
     localStorage.setItem("jwtdatingapp", JSON.stringify(data.token, data.user));
     setLoggedIn(true);
     alert("Successfully Logged in!");
-    console.log(response.data);
   };
 
   //signup
@@ -81,7 +76,6 @@ if (!data.token || !data.user) return;
       const { data } = response;
     if (!data.token || !data.user) return;
     setUser(data.user);
-    console.log(response.data);
   };
 
 
@@ -98,6 +92,7 @@ if (!data.token || !data.user) return;
         signupUser,
         getUsers,
         loggedIn,
+        getUserById,
        // messages,
         //getMessagesByChatroomId,
       }}

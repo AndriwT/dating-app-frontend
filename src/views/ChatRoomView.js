@@ -8,17 +8,27 @@ import { UserContext } from "../context/UserContext";
 const apiUrl = process.env.REACT_APP_API_URL;
 
 const ChatRoomView = () => {
-  const {user} = useContext(UserContext);
+  const {user, getUserById} = useContext(UserContext);
   const userTwoId = getQueryVariable('id');
   const socketRef = useRef();
   const chatIdRef = useRef(chatIdGenerator(user.uid, userTwoId))
   const [state, setState] = useState({message: ""});
   const [chat, setChat] = useState([]);
+  const [chatUser, setChatUser] = useState(null)
 
+
+  
   useEffect(() => {
     getMessagesByChatroomId();
+    getChatUserObject()
   }, [])
-
+  
+  const getChatUserObject = async () => {
+    const chatUserObject = await getUserById(userTwoId);
+    console.log(chatUserObject);
+    setChatUser(chatUserObject);
+  }
+  
 
 
   const getMessagesByChatroomId = async () => {
@@ -52,7 +62,7 @@ function getIdValue (id) {
 
 
 function chatIdGenerator (userIdOne, userIdTwo) {
-  console.log("USER ID 1: ",userIdOne,"USER ID 2", userIdTwo);
+  // console.log("USER ID 1: ",userIdOne,"USER ID 2", userIdTwo);
   const userIdOneValue = getIdValue(userIdOne);
   const userIdTwoValue = getIdValue(userIdTwo);
 
@@ -68,7 +78,7 @@ function chatIdGenerator (userIdOne, userIdTwo) {
     setState({ [e.target.name]: e.target.value });
   };
 
-console.log("CHATROOM ID: ", chatIdRef);
+// console.log("CHATROOM ID: ", chatIdRef);
   useEffect(() => {
     socketRef.current = io.connect(`${apiUrl}?id=` + chatIdRef.current); // changed "http://localhost:5000?id=" --> `${apiUrl}?id=`
     socketRef.current.on("message", (currentMessage) => {
@@ -88,9 +98,9 @@ console.log("CHATROOM ID: ", chatIdRef);
   const renderChat = () => {
     return chat.map(({ message }, index) => (
       <div key={index}>
-        <h3>
+        <h5>
           <span>{message}</span>
-        </h3>
+        </h5>
       </div>
     ));
   };
@@ -104,7 +114,7 @@ console.log("CHATROOM ID: ", chatIdRef);
 
 
 
-          <h1>Chat Log</h1>
+          <h3>You are chatting with {chatUser.name}</h3>
           <hr />
           <div className="messages-container">
           {renderChat()}

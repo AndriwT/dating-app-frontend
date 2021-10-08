@@ -9,8 +9,9 @@ import {
 
 const UserCard = ({ props: { name, gender, age, bio, uid } }) => {
   return (
-    <Card sx={{ width: 250, height: 250 }}>
-      <CardContent>
+    <Card sx={{ width: 250 }} style={{ minHeight: "190px", padding: "16px" }}>
+
+      <CardContent style={{ minHeight: "190px", padding: "16px" }}>
         <Typography gutterBottom variant="h5" component="div">
           {name}, {age}
         </Typography>
@@ -20,14 +21,14 @@ const UserCard = ({ props: { name, gender, age, bio, uid } }) => {
 
         <Typography
           sx={{ maxHeight: 80 }}
-          style={{ lineClamp: 3, wordBreak: "break-all", overflow: "scroll"}}
+          style={{ lineClamp: 3, wordBreak: "break-all", overflow: "scroll" }}
           variant="body2"
           color="text.secondary"
         >
           {bio}
         </Typography>
       </CardContent>
-      <CardActions>
+     
         <Link
           to={"/chatroom?id=" + uid}
           style={{ textDecoration: "none", justifyContent: "center" }}
@@ -41,7 +42,7 @@ const UserCard = ({ props: { name, gender, age, bio, uid } }) => {
             Message
           </Button>
         </Link>
-      </CardActions>
+     
     </Card>
   );
 };

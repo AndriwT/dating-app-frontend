@@ -5,8 +5,6 @@ import UserCard from "../components/UserCard";
 const MatchView = () => {
   const { users, user } = useContext(UserContext);
 
-  console.log(users);
-
   return (
     <>
       <div className="matches-container">
@@ -14,11 +12,16 @@ const MatchView = () => {
           Chat Rooms
         </h1>
         {users &&
-          users.map((user, i) => (
+          users.map((person, i) => {
+            if (person.uid === user.uid) {
+              return null
+            } 
+            return (
             <div key={i} className="users-container">
-              <UserCard props={user} />
+              <UserCard props={person} />
             </div>
-          ))}
+            )
+          })}
       </div>
     </>
   );
