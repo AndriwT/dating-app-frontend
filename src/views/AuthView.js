@@ -62,7 +62,7 @@ const AuthView = () => {
         <Col className="App">
           <h2>W/O Contaxts</h2>
           <img
-            src="/637454658886270000.png"
+            src="/nasa-Q1p7bh3SHj8-unsplash.jpeg"
             style={{
               width: "450px",
               marginBottom: "20px",
@@ -70,8 +70,8 @@ const AuthView = () => {
               boxShadow: "0px 3px 3px 3px rgba(128, 128, 128, 0.2)",
             }}
           />
-          <p>
-            Welcome to W/O Contaxt, The chatroom that allows you to connect with
+          <p style={{width: 450, marginLeft: 92}}>
+            Welcome to W/O Contaxt, The messaging app that allows you to connect with
             people all around the world in real time and without context! It's
             as easy as jumping in a room with whoever you prefer and striking a
             conversation, maybe with a friend that also uses the app, or a
@@ -131,7 +131,7 @@ const AuthView = () => {
                 >
                   LogIn
                 </Button>
-                <label>Sign Up to create an account</label>
+                <label style={{marginTop: 30}}>Sign Up to create an account</label>
                 <Button
                   className="input-field"
                   onClick={() => history.push(`/signup`)}
