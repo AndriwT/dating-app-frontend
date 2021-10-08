@@ -1,6 +1,5 @@
 import { useState, useEffect, useContext } from "react";
-import { useHistory, withRouter } from 'react-router-dom'
-
+import { useHistory, withRouter } from "react-router-dom";
 
 import { Container, Row, Col } from "react-bootstrap";
 import {
@@ -51,9 +50,9 @@ const AuthView = () => {
         });
         await loginUser(user);
       } catch (error) {
-        console.log(error)
+        console.log(error);
       }
-      history.push('/matches')
+      history.push("/matches");
     }
   };
 
@@ -61,7 +60,7 @@ const AuthView = () => {
     <Container>
       <Row>
         <Col className="App">
-          <h2>i.love(you);</h2>
+          <h2>W/O Contaxts</h2>
           <img
             src="/637454658886270000.png"
             style={{
@@ -71,12 +70,12 @@ const AuthView = () => {
               boxShadow: "0px 3px 3px 3px rgba(128, 128, 128, 0.2)",
             }}
           />
-
           <p>
-            Hi There! This text here will tell you the basics of this app as
-            well as invite you to either login or signup, so when this text is
-            done it will actually be really cool and have real life purpose, not
-            like you reading this crap right now :D
+            Welcome to W/O Contaxt, The chatroom that allows you to connect with
+            people all around the world in real time and without context! It's
+            as easy as jumping in a room with whoever you prefer and striking a
+            conversation, maybe with a friend that also uses the app, or a
+            perfect stranger that spikes your interest, the choice is yours!
           </p>
         </Col>
         <Col className="App">
@@ -132,7 +131,7 @@ const AuthView = () => {
                 >
                   LogIn
                 </Button>
-                <label>!account ? signup : exit;</label>
+                <label>Sign Up to create an account</label>
                 <Button
                   className="input-field"
                   onClick={() => history.push(`/signup`)}

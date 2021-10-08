@@ -4,7 +4,6 @@ import axios from "axios";
 import { useRef } from "react";
 import { useState } from "react";
 import io from "socket.io-client"
-// import MessageBubble from "../components/MessageBubble";
 import { UserContext } from "../context/UserContext";
 const apiUrl = process.env.REACT_APP_API_URL;
 
@@ -100,17 +99,16 @@ console.log("CHATROOM ID: ", chatIdRef);
   return (
     <>
       <div className="chat-container">
-        <h2 className="matches-title">This is the Chatroom View</h2>
+        <h2 className="matches-title" style={{marginBottom: 30}}>Chat Room</h2>
         <div className="render-chat">
 
-          <h5>{user.name}</h5>
+
 
           <h1>Chat Log</h1>
           <hr />
           <div className="messages-container">
           {renderChat()}
           </div>
-          {/* <MessageBubble /> */}
           <div style={{ marginTop: "22px" }}>
             <TextField
               style={{ width: "100%" }}
@@ -121,8 +119,8 @@ console.log("CHATROOM ID: ", chatIdRef);
               variant="outlined"
               label="Message"
             />
-            <div style={{display: "flex", justifyContent: "end"}}>
-            <Button variant="outlined" onClick={onMessageSubmit}>Send</Button>
+            <div style={{marginTop: 20}}>
+            <Button variant="contained" onClick={onMessageSubmit} style={{background: "purple", width: "100%"}}>Send</Button>
             </div>
           </div>
         </div>

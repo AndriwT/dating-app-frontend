@@ -16,17 +16,17 @@ const SideNavBar = () => {
     <div className="sidenav">
       <div>
         <div>
-        <h3>{user.name}</h3>
-        <h6>{user.gender}</h6>
+        <h4>{user.name}</h4>
+        <h6 style={{marginTop: 40 }}>{user.gender}</h6>
         <h6>{user.age}</h6>
-        <p>{user.bio}</p>
+        <p style={{marginTop: 40 }}>{user.bio}</p>
         </div>
-        <div className="">
+        <div className="links">  
         <ul>
           <li style={{ cursor: "pointer" }}>
-            <Link to="/matches">
+            <Link to="/matches" style={{color: "white", textDecoration: "none"}}>
               <i className="bi bi-box-arrow-right"></i>
-              ChatRooms
+              Chatrooms
             </Link>
           </li>
           {loggedIn && (

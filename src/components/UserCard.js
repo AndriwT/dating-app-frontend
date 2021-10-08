@@ -9,23 +9,38 @@ import {
 
 const UserCard = ({ props: { name, gender, age, bio, uid } }) => {
   return (
-    <Card sx={{ width: 250, height: 250}}>
+    <Card sx={{ width: 250, height: 250 }}>
       <CardContent>
         <Typography gutterBottom variant="h5" component="div">
-          {name}
+          {name}, {age}
         </Typography>
         <Typography variant="body2" color="text.secondary">
-          {gender}
+          <b>{gender}</b>
         </Typography>
-        <Typography variant="body2" color="text.secondary">
-          {age}
-        </Typography>
-        <Typography sx={{maxHeight: 80}} style={{lineClamp: 3, wordBreak: 'break-all', overflow: 'hidden'}} variant="body2" color="text.secondary">
+
+        <Typography
+          sx={{ maxHeight: 80 }}
+          style={{ lineClamp: 3, wordBreak: "break-all", overflow: "scroll"}}
+          variant="body2"
+          color="text.secondary"
+        >
           {bio}
         </Typography>
       </CardContent>
       <CardActions>
-        <Link to={"/chatroom?id=" + uid}><Button size="small">Message</Button></Link>
+        <Link
+          to={"/chatroom?id=" + uid}
+          style={{ textDecoration: "none", justifyContent: "center" }}
+        >
+          <Button
+            variant="contained"
+            style={{
+              background: "purple",
+            }}
+          >
+            Message
+          </Button>
+        </Link>
       </CardActions>
     </Card>
   );
