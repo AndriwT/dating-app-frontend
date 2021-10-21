@@ -1,7 +1,6 @@
 import axios from "axios";
 import { useState, useEffect, createContext } from "react";
 
-
 export const UserContext = createContext({});
 
 const apiUrl = process.env.REACT_APP_API_URL;
@@ -19,7 +18,7 @@ const UserProvider = ({ children }) => {
     bio: "",
   });
 
-  useEffect(  () => {
+  useEffect(() => {
     checkLoggedIn();
     getUsers();
   }, []);
@@ -27,9 +26,8 @@ const UserProvider = ({ children }) => {
   const getUserById = async (id) => {
     const response = await axios.get(`${apiUrl}/api/auth/${id}`);
     return response.data;
-  }
- 
-  
+  };
+
   const getUsers = async () => {
     const response = await axios.get(`${apiUrl}/api/auth`);
     setUsers(response.data);
@@ -39,12 +37,11 @@ const UserProvider = ({ children }) => {
   const checkLoggedIn = async () => {
     const token = localStorage.getItem("jwtdatingapp");
 
-    
     if (token) {
-      let payload = token.split(".")[1]
+      let payload = token.split(".")[1];
       payload = atob(payload);
       const userId = JSON.parse(payload).uid;
-      const userFromDB =  await getUserById(userId);
+      const userFromDB = await getUserById(userId);
       setUser(userFromDB);
     }
     // setUser({ ...user, uid: JSON.parse(payload).uid});
@@ -53,13 +50,10 @@ const UserProvider = ({ children }) => {
   };
 
   const loginUser = async (user) => {
-    const response = await axios.post(
-      `${apiUrl}/api/auth/login`,
-      user
-    );
+    const response = await axios.post(`${apiUrl}/api/auth/login`, user);
     const { data } = response;
 
-if (!data.token || !data.user) return;
+    if (!data.token || !data.user) return;
 
     setUser(data.user);
     localStorage.setItem("jwtdatingapp", JSON.stringify(data.token, data.user));
@@ -69,16 +63,11 @@ if (!data.token || !data.user) return;
 
   //signup
   const signupUser = async (user) => {
-    const response = await axios.post(
-      `${apiUrl}/api/auth/signup`,
-      user
-      );
-      const { data } = response;
+    const response = await axios.post(`${apiUrl}/api/auth/signup`, user);
+    const { data } = response;
     if (!data.token || !data.user) return;
     setUser(data.user);
   };
-
-
 
   return (
     <UserContext.Provider
@@ -93,7 +82,7 @@ if (!data.token || !data.user) return;
         getUsers,
         loggedIn,
         getUserById,
-       // messages,
+        // messages,
         //getMessagesByChatroomId,
       }}
     >

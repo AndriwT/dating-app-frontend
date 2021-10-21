@@ -10,7 +10,6 @@ import {
 const UserCard = ({ props: { name, gender, age, bio, uid } }) => {
   return (
     <Card sx={{ width: 250 }} style={{ minHeight: "190px", padding: "16px" }}>
-
       <CardContent style={{ minHeight: "190px", padding: "16px" }}>
         <Typography gutterBottom variant="h5" component="div">
           {name}, {age}
@@ -28,21 +27,20 @@ const UserCard = ({ props: { name, gender, age, bio, uid } }) => {
           {bio}
         </Typography>
       </CardContent>
-     
-        <Link
-          to={"/chatroom?id=" + uid}
-          style={{ textDecoration: "none", justifyContent: "center" }}
+
+      <Link
+        to={"/chatroom?id=" + uid}
+        style={{ textDecoration: "none", justifyContent: "center" }}
+      >
+        <Button
+          variant="contained"
+          style={{
+            background: "purple",
+          }}
         >
-          <Button
-            variant="contained"
-            style={{
-              background: "purple",
-            }}
-          >
-            Message
-          </Button>
-        </Link>
-     
+          Message
+        </Button>
+      </Link>
     </Card>
   );
 };

@@ -16,7 +16,6 @@ const ChatRoomView = () => {
   const [chat, setChat] = useState([]);
   const [chatUser, setChatUser] = useState(null)
 
-
   const getChatUserObject = async () => {
     const chatUserObject = await getUserById(userTwoId);
     console.log(chatUserObject);
@@ -27,8 +26,6 @@ const ChatRoomView = () => {
     getMessagesByChatroomId();
     getChatUserObject()
   }, [])
-  
-  
 
 
   const getMessagesByChatroomId = async () => {
@@ -48,7 +45,7 @@ const ChatRoomView = () => {
             return decodeURIComponent(pair[1]);
         }
     }
-    console.log('Query variable %s not found', variable);
+    console.log('Query variable is not found', variable);
 }
 
 

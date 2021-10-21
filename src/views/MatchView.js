@@ -14,13 +14,13 @@ const MatchView = () => {
         {users &&
           users.map((person, i) => {
             if (person.uid === user.uid) {
-              return null
-            } 
+              return null;
+            }
             return (
-            <div key={i} className="users-container">
-              <UserCard props={person} />
-            </div>
-            )
+              <div key={i} className="users-container">
+                <UserCard props={person} />
+              </div>
+            );
           })}
       </div>
     </>

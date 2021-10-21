@@ -1,4 +1,4 @@
-import { useState, useEffect, useContext } from "react";
+import { useState, useContext } from "react";
 import { useHistory, withRouter } from "react-router-dom";
 
 import { Container, Row, Col } from "react-bootstrap";
@@ -18,9 +18,9 @@ import { UserContext } from "../context/UserContext";
 
 const AuthView = () => {
   const history = useHistory();
-  const { loginUser, loggedIn } = useContext(UserContext);
+  const { loginUser, user, loggedIn } = useContext(UserContext);
   const [showPassword, setShowPassword] = useState(false);
-  const [user, setUser] = useState({
+  const [credentials, setCredentials] = useState({
     email: "",
     password: "",
   });
@@ -34,25 +34,26 @@ const AuthView = () => {
   };
 
   const handleChange = (event) => {
-    setUser({ ...user, [event.target.name]: event.target.value });
+    setCredentials({ ...credentials, [event.target.name]: event.target.value });
   };
 
   const handleSubmit = async (event) => {
     event.preventDefault();
-    if (!user.email || !user.password) {
+    if (!credentials.email || !credentials.password) {
       alert("Please check credentials");
     } else {
-      setUser({ [event.target.name]: event.target.value });
+      setCredentials({ [event.target.name]: event.target.value });
       try {
-        setUser({
+        setCredentials({
           email: "",
           password: "",
         });
-        await loginUser(user);
+        await loginUser(credentials);
+        history.push("/matches");
       } catch (error) {
+        alert("Please check credentials");
         console.log(error);
       }
-      history.push("/matches");
     }
   };
 
@@ -70,12 +71,13 @@ const AuthView = () => {
               boxShadow: "0px 3px 3px 3px rgba(128, 128, 128, 0.2)",
             }}
           />
-          <p style={{width: 450, marginLeft: 92}}>
-            Welcome to W/O Contaxt, The messaging app that allows you to connect with
-            people all around the world in real time and without context! It's
-            as easy as jumping in a room with whoever you prefer and striking a
-            conversation, maybe with a friend that also uses the app, or a
-            perfect stranger that spikes your interest, the choice is yours!
+          <p style={{ width: 450, marginLeft: 92 }}>
+            Welcome to W/O Contaxt, The messaging app that allows you to connect
+            with people all around the world in real time and without context!
+            It's as easy as jumping in a room with whoever you prefer and
+            striking a conversation, maybe with a friend that also uses the app,
+            or a perfect stranger that spikes your interest, the choice is
+            yours!
           </p>
         </Col>
         <Col className="App">
@@ -86,7 +88,7 @@ const AuthView = () => {
               <TextField
                 onChange={handleChange}
                 name="email"
-                value={user.email}
+                value={credentials.email}
                 className="input-field"
                 id="filled-basic"
                 label="Email"
@@ -102,7 +104,7 @@ const AuthView = () => {
                   id="filled-adornment"
                   className="input-field-password input-field"
                   type={showPassword ? "text" : "password"}
-                  value={user.password}
+                  value={credentials.password}
                   onChange={handleChange}
                   name="password"
                   endAdornment={
@@ -131,7 +133,9 @@ const AuthView = () => {
                 >
                   LogIn
                 </Button>
-                <label style={{marginTop: 30}}>Sign Up to create an account</label>
+                <label style={{ marginTop: 30 }}>
+                  Sign Up to create an account
+                </label>
                 <Button
                   className="input-field"
                   onClick={() => history.push(`/signup`)}
